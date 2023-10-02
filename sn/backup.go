@@ -5,6 +5,8 @@ import (
 	"log"
 	"os"
 	"sort"
+
+	"github.com/hdnha11/standardnotes-export/slices"
 )
 
 type Backup struct {
@@ -115,10 +117,5 @@ func getTags(noteUUID string, lookup map[string][]Tag) []Tag {
 	sort.Slice(tags, func(i, j int) bool {
 		return tags[i].FullTitle() < tags[j].FullTitle()
 	})
-	return removeDup(tags)
-}
-
-func removeDup[T any](xs []T) []T {
-	// TODO
-	return xs
+	return slices.UniqueBy(tags, func(t Tag) string { return t.UUID })
 }

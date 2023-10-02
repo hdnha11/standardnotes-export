@@ -2,6 +2,8 @@ package sn
 
 import (
 	"strings"
+
+	"github.com/hdnha11/standardnotes-export/slices"
 )
 
 type Tag struct {
@@ -22,12 +24,6 @@ func (t Tag) FullTitle() string {
 		cur = cur.Parent
 	}
 
-	reverse(titles)
+	slices.Reverse(titles)
 	return strings.Join(titles, "/")
-}
-
-func reverse[T any](xs []T) {
-	for i := 0; i < len(xs)/2; i++ {
-		xs[i], xs[len(xs)-1-i] = xs[len(xs)-1-i], xs[i]
-	}
 }
